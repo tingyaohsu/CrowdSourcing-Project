@@ -1,1 +1,0 @@
-# tingyaohsu.github.io
