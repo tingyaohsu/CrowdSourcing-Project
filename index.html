@@ -106,7 +106,7 @@ $(document).ready(function(){
       word_count = $.trim($('[name="Turker_story"]').val()).split(' ').filter(function(v){return v!==''}).length;
       console.log(word_count);
       if (word_count<50){
-        $('<div><span style="color:red">Please write Over 50 words !!!</span></div>').attr("id","error").append(
+        $('<div><span style="color:red">Please write Over 50 words !!!</span></div>').attr("id","error").prependTo(
               $('.submitline')
         );
         setTimeout( "$('span').hide();", 2000);
