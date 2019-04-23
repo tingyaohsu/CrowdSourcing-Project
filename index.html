@@ -107,8 +107,9 @@ $(document).ready(function(){
       console.log(word_count);
       if (word_count<50){
         $('<span style="color:red">Please write Over 50 words !!!</span>').attr("id","error").appendTo(
-              $('.submitline')
+              $('#story')
         );
+        setTimeout( "$('span').hide();", 2000);
       }
       else{
         $("#mturk_form").submit();  
