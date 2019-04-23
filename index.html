@@ -102,11 +102,13 @@ $('#story').on({
       $('<span>____</span>').attr("id","error").appendTo(
             $('#story')
       );
+      alert("error");
     }
     else{
+      alert("ok");
       $("#mturk_form").submit();
     }
-    console.log(word_count)
+    console.log(word_count);
   }
 });
 </script>
