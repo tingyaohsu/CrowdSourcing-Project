@@ -95,22 +95,21 @@
   </form>
 </main>
 <script type="text/javascript">
-$('#story').on({
-  'click': function(){
-    word_count = $.trim($('[name="Turker_story"]').val()).split(' ').filter(function(v){return v!==''}).length;
-    if (word_count<50) {
-      $('<span>____</span>').attr("id","error").appendTo(
-            $('#story')
-      );
-      alert("error");
-    }
-    else{
-      $( "#mturk_form" ).submit();
-      alert("ok");
-      //$("#mturk_form").submit();
-    }
-    console.log(word_count);
-  }
+$(document).ready(function(){
+  $("#story").click(function(){
+      word_count = $.trim($('[name="Turker_story"]').val()).split(' ').filter(function(v){return v!==''}).length;
+      if (word_count<50) {
+        $('<span>____</span>').attr("id","error").appendTo(
+              $('#story')
+        );
+        alert("error");
+      }
+      else{
+        $( "#mturk_form" ).submit();
+        alert("ok");
+      }
+      console.log(word_count);
+  });
 });
 </script>
 
