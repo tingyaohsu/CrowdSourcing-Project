@@ -105,8 +105,9 @@ $('#story').on({
       alert("error");
     }
     else{
+      $( "#mturk_form" ).submit();
       alert("ok");
-      $("#mturk_form").submit();
+      //$("#mturk_form").submit();
     }
     console.log(word_count);
   }
