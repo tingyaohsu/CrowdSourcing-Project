@@ -10,6 +10,7 @@
     <title>Album example · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
+    <script type="text/javascript" src="mturk.js"></script>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -121,10 +122,9 @@
       </div>
     </div>
   </div>
-  <form action="index.html">
+  <form id="mturk_form" name="mturk_form">
     <div align = "center">
-      <textarea name="myTextBox" cols="50" rows="5">
-      Enter some story...
+      <textarea name="myTextBox" cols="50" rows="5" placeholder="Enter your Story">
       </textarea>
       <br/>
       <button type="submit" value="Submit">Submit</button>
