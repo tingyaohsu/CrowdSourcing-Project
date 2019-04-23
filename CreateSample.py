@@ -90,7 +90,7 @@ question_sample = open("setting.xml", "r").read()
 worker_requirements = [{
     'QualificationTypeId': '00000000000000000040',
     'Comparator': 'GreaterThanOrEqualTo',
-    'IntegerValues': [0],
+    'IntegerValues': [10],
     'RequiredToPreview': True,
 }]
 
