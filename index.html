@@ -98,6 +98,7 @@
 $(document).ready(function(){
   $("#story").click(function(){
       word_count = $.trim($('[name="Turker_story"]').val()).split(' ').filter(function(v){return v!==''}).length;
+      console.log(word_count);
       if (word_count<50){
         $('<span>____</span>').attr("id","error").appendTo(
               $('#story')
@@ -108,7 +109,7 @@ $(document).ready(function(){
         alert("ok");
         //$("#mturk_form").submit();  
       }
-      console.log(word_count);
+      //console.log(word_count);
   });
 });
 </script>
