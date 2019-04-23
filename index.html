@@ -95,7 +95,7 @@
     </div>
   </form>
   <div class="row">
-    <div class="col text-center">
+    <div class="col text-center submitline">
       <button id="story" value="Submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
@@ -106,8 +106,8 @@ $(document).ready(function(){
       word_count = $.trim($('[name="Turker_story"]').val()).split(' ').filter(function(v){return v!==''}).length;
       console.log(word_count);
       if (word_count<50){
-        $('<span>____</span>').attr("id","error").appendTo(
-              $('#story')
+        $('<span style="color:red">Please write Over 50 words !!!</span>').attr("id","error").appendTo(
+              $('.submitline')
         );
       }
       else{
