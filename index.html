@@ -90,7 +90,7 @@
     <div align = "center">
       <textarea name="Turker_story" cols="50" rows="5" placeholder="Enter your story here !!! Please write at least 50 words ..."></textarea>
       <br/>
-      <button id="story" type="submit" value="Submit">Submit</button>
+      <button id="story">Submit</button>
     </div>
   </form>
 </main>
@@ -102,7 +102,9 @@ $('#story').on({
       $('<span>____</span>').attr("id","error").appendTo(
             $('#story')
       );
-      alert("error");
+    }
+    else{
+      $("#mturk_form").submit();
     }
     console.log(word_count)
   }
