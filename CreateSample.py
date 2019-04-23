@@ -57,10 +57,9 @@ environments = {
         },
         "sandbox": {
             "endpoint": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
-                         #https://mturk-requester-sandbox.us-east-1.amazonaws.com
             "preview": "https://workersandbox.mturk.com/mturk/preview",
             "manage": "https://requestersandbox.mturk.com/mturk/manageHITs",
-            "reward": "0.11"
+            "reward": "0.5"
         },
 }
 mturk_environment = environments["live"] if create_hits_in_live else environments["sandbox"]
@@ -89,21 +88,21 @@ question_sample = open("setting.xml", "r").read()
 # at least 80% of their assignments approved. See:
 # http://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/ApiReference_QualificationRequirementDataStructureArticle.html#ApiReference_QualificationType-IDs
 worker_requirements = [{
-    'QualificationTypeId': '000000000000000000L0',
+    'QualificationTypeId': '00000000000000000040',
     'Comparator': 'GreaterThanOrEqualTo',
-    'IntegerValues': [80],
+    'IntegerValues': [5],
     'RequiredToPreview': True,
 }]
 
 # Create the HIT
 response = client.create_hit(
     MaxAssignments=3,
-    LifetimeInSeconds=600,
+    LifetimeInSeconds=86400,
     AssignmentDurationInSeconds=600,
     Reward=mturk_environment['reward'],
     Title='Answer a simple question',
-    Keywords='question, answer, research',
-    Description='Answer a simple question. Created from mturk-code-samples.',
+    Keywords='question, answer, research, story',
+    Description='Descript a short story from the photos.',
     Question=question_sample,
     QualificationRequirements=worker_requirements,
 )
