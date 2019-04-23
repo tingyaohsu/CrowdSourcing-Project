@@ -3,7 +3,7 @@ import csv
 
 data=[]
 
-with open('rootkey.csv', 'r') as csvFile:
+with open('../rootkey.csv', 'r') as csvFile:
 	reader = csv.reader(csvFile)
 	for row in reader:
 		root = ''.join(row)
