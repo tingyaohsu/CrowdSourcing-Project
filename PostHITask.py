@@ -28,6 +28,7 @@ import csv
 # https://requestersandbox.mturk.com/ with the same credentials as your main
 # MTurk account.
 
+
 #load key file
 data=[]
 
@@ -36,14 +37,14 @@ with open('../rootkey.csv', 'r') as csvFile:
     for row in reader:
         root = ''.join(row)
         data.append(root)
-        #print(row)
-print (data)
 
-aws_access_key_id = data[0].split('=')[1]    #'YOUR_ACCESS_ID'
+#print (data)
+
+aws_access_key_id = data[0].split('=')[1]        #'YOUR_ACCESS_ID'
 aws_secret_access_key = data[1].split('=')[1]    #'YOUR_SECRET_KEY'
 
-print(aws_access_key_id)
-print(aws_secret_access_key)
+#print(aws_access_key_id)
+#print(aws_secret_access_key)
 
 # By default, HITs are created in the free-to-use Sandbox
 create_hits_in_live = False
@@ -53,7 +54,7 @@ environments = {
             "endpoint": "https://mturk-requester.us-east-1.amazonaws.com",
             "preview": "https://www.mturk.com/mturk/preview",
             "manage": "https://requester.mturk.com/mturk/manageHITs",
-            "reward": "0.00"
+            "reward": "0.5"
         },
         "sandbox": {
             "endpoint": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
@@ -97,17 +98,17 @@ worker_requirements = [{
 # Create the HIT
 response = client.create_hit(
     MaxAssignments=3,
-    LifetimeInSeconds=86400,
+    LifetimeInSeconds=500000,
     AssignmentDurationInSeconds=600,
     Reward=mturk_environment['reward'],
-    Title='Answer a simple question',
+    Title='Visual Storytelling',
     Keywords='question, answer, research, story',
     Description='Descript a short story from the photos.',
     Question=question_sample,
     QualificationRequirements=worker_requirements,
 )
 
-# The response included several fields that will be helpful later
+# Show HIT_ID, HIT worker interface, HIT result
 hit_type_id = response['HIT']['HITTypeId']
 hit_id = response['HIT']['HITId']
 print ("\nCreated HIT: {}".format(hit_id))
