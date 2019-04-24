@@ -68,11 +68,13 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
   </section>
   <div class="container">
     <h1 class="text-center" style="color: white">Choose Your Own Instrument</h1>
-    <div id="button_choose" class="text-center">
-      <button type="button" class="btn btn-info" id="bass_drum">Bass Drum</button>
-      <button type="button" class="btn btn-info" id="snare_drum">Snare Drum</button>
-      <button type="button" class="btn btn-info" id="low_tom">Low Tom</button>
-      <button type="button" class="btn btn-info" id="mid_tom">Mid Tom</button>
+    <div id="choose" class="text-center">
+      <div class="button_choose">
+        <button type="button" class="btn btn-info" id="bass_drum">Bass Drum</button>
+        <button type="button" class="btn btn-info" id="snare_drum">Snare Drum</button>
+        <button type="button" class="btn btn-info" id="low_tom">Low Tom</button>
+        <button type="button" class="btn btn-info" id="mid_tom">Mid Tom</button>
+      </div>
     </div>
     <div id="grid"></div>
   </div>
@@ -111,23 +113,35 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     
     $( "#bass_drum" ).click(function() {
         $('#grid').show();
-        $('#button_choose').hide();
-        choose = sounds[0]
+        $('.button_choose').hide();
+        choose_ins = sounds[0]
+        $('<span instrument="bass_drum" style="color: white">Bass Drum</span>').appendTo(
+          $('#choose')
+        );
     });
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
-        $('#button_choose').hide();
-        choose = sounds[1]
+        $('.button_choose').hide();
+        choose_ins = sounds[1]
+        $('<span instrument="snare_drum" style="color: white">Snare Drum</span>').appendTo(
+          $('#choose')
+        );
     });
     $( "#low_tom" ).click(function() {
         $('#grid').show();
-        $('#button_choose').hide();
-        choose = sounds[2]
+        $('.button_choose').hide();
+        choose_ins = sounds[2]
+        $('<span instrument="low_tom" style="color: white">Low Tom</span>').appendTo(
+          $('#choose')
+        );
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
-        $('#button_choose').hide();
-        choose = sounds[3]
+        $('.button_choose').hide();
+        choose_ins = sounds[3]
+        $('<span instrument="mid_tom" style="color: white">Mid Tom</span>').appendTo(
+          $('#choose')
+        );
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -187,6 +201,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     // needed for page history
     window.addEventListener('hashchange', restoreState, false);
 
+    //test one beat
+    sLen =1;
     for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
       (function (index) {
         // create buffer for sound
