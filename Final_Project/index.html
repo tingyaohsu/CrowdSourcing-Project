@@ -220,6 +220,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         fragment.appendChild(btn);
       }
       var tags = $('.button_choose').children().toArray()[soundIndex];
+      console.log(tags);
       console.log(tags.attr("id"));
       var one_ins = $('<div></div>').attr("class",tags.attr("id"))
       theGrid.appendChild(one_ins);
