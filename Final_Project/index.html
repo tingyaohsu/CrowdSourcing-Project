@@ -22,20 +22,6 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       background-color: black;
     }
 
-    p {
-      margin: 0;
-    }
-
-    /*button.beat {
-      background-color: #DBD3C9;
-      padding: 18px;
-      border: 10px solid white;
-      margin: 5px;
-      cursor: pointer;
-      width: 0;
-      height: 0;
-    }*/
-
     button.beat {
       background-color: black;
       padding: 7.5px;
@@ -49,7 +35,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     button.beat_w {
       background-color: black;
       padding: 7.5px;
-      border: 7.5px solid white !important;
+      border: 7.5px solid white;
       margin: 3px;
       cursor: pointer;
       width: 0;
@@ -69,12 +55,26 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     #grid {
       width: 1200px;
       height: 200px;
-      position: absolute;
-      top:0;
-      bottom: 0;
+      position: relative;
+      top:20px;
+      bottom: 20px;
       left: 0;
       right: 0;
       margin: auto;
+    }
+    .ins_text{ 
+      font-style: italic;
+      color: white;
+      font-size: 25px; 
+    }
+    .button_choose{
+      margin-top: 40px;
+    }
+    .btn-click{
+      margin: 10px;
+    }
+    #submitBtn{
+      margin-top: 30px;
     }
 
     .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
@@ -84,17 +84,17 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
   <section class="jumbotron text-center">
     <div class="container">
       <h1 class="jumbotron-heading">CrowdBeatComposer</h1>
-      <p class="lead text-muted">Building Beat togehter for fun!!!</p>
+      <p class="lead text-muted">Building Beat together for fun !!!<br><br> Please choose one of the four following instruments you want and click at least five beats.</p>
     </div>
   </section>
   <div class="container">
-      <h1 class="text-center" style="color: white">Choose Your Own Instrument</h1>
+      <h1 class="text-center title_word" style="color: white">Instrument</h1>
       <div id="choose" class="text-center">
         <div class="button_choose">
-          <button type="button" class="btn btn-info" id="bass_drum">Bass Drum</button>
-          <button type="button" class="btn btn-info" id="snare_drum">Snare Drum</button>
-          <button type="button" class="btn btn-info" id="low_tom">Low Tom</button>
-          <button type="button" class="btn btn-info" id="mid_tom">Mid Tom</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="bass_drum">Bass Drum</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="snare_drum">Snare Drum</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="low_tom">Low Tom</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="mid_tom">Mid Tom</button>
         </div>
       </div>
       <div id="grid"></div>
@@ -140,45 +140,49 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('#grid').show();
         $('.button_choose').hide();
         //choose_ins = 0
-        $('<span instrument="bass_drum" style="color: white">Bass Drum</span>').appendTo(
+        $('<span class="ins_text" instrument="bass_drum">Bass Drum</span>').appendTo(
           $('#choose')
         );
         $('.snare_drum').hide();
         $('.low_tom').hide();
         $('.mid_tom').hide();
+        $('.title_word').hide();
     });
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
         //choose_ins = 1
-        $('<span instrument="snare_drum" style="color: white">Snare Drum</span>').appendTo(
+        $('<span class="ins_text" instrument="snare_drum">Snare Drum</span>').appendTo(
           $('#choose')
         );
         $('.bass_drum').hide();
         $('.low_tom').hide();
         $('.mid_tom').hide();
+        $('.title_word').hide();
     });
     $( "#low_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
         //choose_ins = 2
-        $('<span instrument="low_tom" style="color: white">Low Tom</span>').appendTo(
+        $('<span class="ins_text" instrument="low_tom">Low Tom</span>').appendTo(
           $('#choose')
         );
         $('.bass_drum').hide();
         $('.snare_drum').hide();
         $('.mid_tom').hide();
+        $('.title_word').hide();
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
         //choose_ins = 3
-        $('<span instrument="mid_tom" style="color: white">Mid Tom</span>').appendTo(
+        $('<span class="ins_text" instrument="mid_tom">Mid Tom</span>').appendTo(
           $('#choose')
         );
         $('.bass_drum').hide();
         $('.snare_drum').hide();
         $('.low_tom').hide();
+        $('.title_word').hide();
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -277,10 +281,13 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
 
     //add button
-    $('<div class="col text-center"><button type="button" class="btn btn-lg btn-primary" id="submitBtn">Submit</button></div>').appendTo(
+    $('<div class="text-center"><button type="button" class="btn btn-lg btn-primary" id="submitBtn">Submit</button></div>').appendTo(
         theGrid
     );
     $("#submitBtn").click(function(){
+      // $("#.id").children().hasClass("on"){
+      //   console.log("have");
+      // });
       console.log("submit ok")
       $("#mturk_form").submit();
     });
