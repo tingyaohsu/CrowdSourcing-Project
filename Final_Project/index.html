@@ -67,16 +67,19 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     </div>
   </section>
   <div class="container">
-    <h1 class="text-center" style="color: white">Choose Your Own Instrument</h1>
-    <div id="choose" class="text-center">
-      <div class="button_choose">
-        <button type="button" class="btn btn-info" id="bass_drum">Bass Drum</button>
-        <button type="button" class="btn btn-info" id="snare_drum">Snare Drum</button>
-        <button type="button" class="btn btn-info" id="low_tom">Low Tom</button>
-        <button type="button" class="btn btn-info" id="mid_tom">Mid Tom</button>
+      <h1 class="text-center" style="color: white">Choose Your Own Instrument</h1>
+      <div id="choose" class="text-center">
+        <div class="button_choose">
+          <button type="button" class="btn btn-info" id="bass_drum">Bass Drum</button>
+          <button type="button" class="btn btn-info" id="snare_drum">Snare Drum</button>
+          <button type="button" class="btn btn-info" id="low_tom">Low Tom</button>
+          <button type="button" class="btn btn-info" id="mid_tom">Mid Tom</button>
+        </div>
       </div>
-    </div>
-    <div id="grid"></div>
+      <div id="grid"></div>
+    <form id="mturk_form" name="mturk_form">
+      <input type="hidden" name="answer" id="answer" value="">
+    </form>
   </div>
   <script>
 
@@ -85,6 +88,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const INTERVAL = 1 / (4 * BPM / (60 * 1000));
     const MAX_BITS = 32;
     const MAX_HEX = MAX_BITS / 4;
+    //var hash;
 
     // sounds originated from http://808.html909.com
     const sounds = [
@@ -160,6 +164,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const buffers = [];
     const theGrid = document.getElementById('grid');
     const sLen = sounds.length;
+
+    //var global_hash ='';
+
     function binToHex(bin) {
       var hex = '';
       for (i = 0, len = bin.length; i < len; i += MAX_BITS) {
@@ -189,10 +196,14 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         state += btn.classList.contains('on') ? '1' : '0';
       });
       // TODO: this causes an unnecessary restore state
-      window.location.hash = binToHex(state);
+      // window.location.hash = binToHex(state);
+      // global_hash = binToHex(state);
+      $("#answer").val(binToHex(state));
     }
     function restoreState() {
-      var hash = window.location.hash;
+      // var hash = window.location.hash;
+      var hash = $("#answer").val();
+      console.log(hash);
       hash = (hash === '') ? '0000000000000000' : hash.substr(1); // Remove the first char (#...)
       hexToBin(hash).split('').map(function(el, i) {
         if (parseInt(el) === 1) {
@@ -204,6 +215,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
     // needed for page history
     window.addEventListener('hashchange', restoreState, false);
+
     for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
       (function (index) {
         // create buffer for sound
@@ -232,20 +244,17 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         fragment.appendChild(btn);
       }
       var tags = $('.button_choose').children().toArray()[soundIndex];
-      //console.log(tags);
-      //console.log($(tags).attr("id"));
       var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
       console.log(fragment);
       one_ins.appendTo(theGrid);
       $(fragment).appendTo(one_ins);
-      //theIns.appendChild(fragment);
-      //theIns.appendChild(fragment);
-      //theGrid.appendChild(document.createElement('p'));
     }
+
     const beats = document.getElementsByClassName('beat');
     var lastTick = TICKS - 1;
     var curTick = 0;
     var lastTime = new Date().getTime();
+
     function drumLoop() {
       const curTime = new Date().getTime();
       if (curTime - lastTime >= INTERVAL) {
