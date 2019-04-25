@@ -202,8 +202,10 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     window.addEventListener('hashchange', restoreState, false);
 
     //test one beat
-    //sLen =1;
+    sLen =1;
     for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
+      console.log(sLen);
+      console.log(soundIndex);
       (function (index) {
         // create buffer for sound
         const req = new XMLHttpRequest();
