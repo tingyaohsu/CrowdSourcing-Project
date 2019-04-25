@@ -188,9 +188,12 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
 
     function restoreState() {
       var hash = window.location.hash;
+      console.log("check here!!!")
       hash = (hash === '') ? '0000000000000000' : hash.substr(1); // Remove the first char (#...)
-
+      console.log(hexToBin(hash))
       hexToBin(hash).split('').map(function(el, i) {
+        console.log("el:",el);
+        console.log("i:",i);
         if (parseInt(el) === 1) {
           beats[i].classList.add('on');
         } else {
