@@ -202,7 +202,6 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     window.addEventListener('hashchange', restoreState, false);
 
     //test one beat
-    sLen =1;
     for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
       console.log(sLen);
       console.log(soundIndex);
@@ -222,24 +221,43 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         req.send();
       })(soundIndex);
 
-      // create row for sound
-      const fragment = document.createDocumentFragment();
+      // // create row for sound
+      // const fragment = document.createDocumentFragment();
 
-      for (var t = 0; t < TICKS; ++t) {
-        const btn = document.createElement('button');
-        btn.className = 'beat';
-        btn.addEventListener('click', function () {
-          this.classList.toggle('on');
-          updateState();
-        }, false);
+      // for (var t = 0; t < TICKS; ++t) {
+      //   const btn = document.createElement('button');
+      //   btn.className = 'beat';
+      //   btn.addEventListener('click', function () {
+      //     this.classList.toggle('on');
+      //     updateState();
+      //   }, false);
 
-        fragment.appendChild(btn);
-      }
+      //   fragment.appendChild(btn);
+      // }
 
-      theGrid.appendChild(fragment);
-      theGrid.appendChild(document.createElement('p'));
+      // theGrid.appendChild(fragment);
+      // theGrid.appendChild(document.createElement('p'));
     }
 
+    //create one row
+    const fragment = document.createDocumentFragment();
+
+    for (var t = 0; t < TICKS; ++t) {
+      const btn = document.createElement('button');
+      btn.className = 'beat';
+      btn.addEventListener('click', function () {
+        this.classList.toggle('on');
+        updateState();
+      }, false);
+
+      fragment.appendChild(btn);
+    }
+
+    theGrid.appendChild(fragment);
+    theGrid.appendChild(document.createElement('p'));
+
+
+    //=====
     const beats = document.getElementsByClassName('beat');
 
     var lastTick = TICKS - 1;
