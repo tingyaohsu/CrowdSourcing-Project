@@ -220,12 +220,12 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         fragment.appendChild(btn);
       }
       var tags = $('.button_choose').children().toArray()[soundIndex];
-      console.log(tags);
-      console.log(tags.attr("id"));
-      var one_ins = $('<div></div>').attr("class",tags.attr("id"))
+      //console.log(tags);
+      console.log($(tags).attr("id"));
+      var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
       theGrid.appendChild(one_ins);
-      theGrid.appendChild(fragment);
-      theGrid.appendChild(document.createElement('p'));
+      one_ins.appendChild(fragment);
+      one_ins.appendChild(document.createElement('p'));
     }
     const beats = document.getElementsByClassName('beat');
     var lastTick = TICKS - 1;
