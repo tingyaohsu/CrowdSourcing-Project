@@ -219,9 +219,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }, false);
         fragment.appendChild(btn);
       }
-      var tags = ($('.button_choose').children().toArray()[soundIndex]).attr("id");
-      console.log(tags);
-      var one_ins = $('<div></div>').attr("class",tags)
+      var tags = $('.button_choose').children().toArray()[soundIndex];
+      console.log(tags.attr("id"));
+      var one_ins = $('<div></div>').attr("class",tags.attr("id"))
       theGrid.appendChild(one_ins);
       one_ins.appendChild(fragment);
       one_ins.appendChild(document.createElement('p'));
