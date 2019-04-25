@@ -85,6 +85,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const INTERVAL = 1 / (4 * BPM / (60 * 1000));
     const MAX_BITS = 32;
     const MAX_HEX = MAX_BITS / 4;
+    choose_ins = 0;
 
     // sounds originated from http://808.html909.com
     const sounds = [
@@ -114,7 +115,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#bass_drum" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = sounds[0]
+        choose_ins = 0
         $('<span instrument="bass_drum" style="color: white">Bass Drum</span>').appendTo(
           $('#choose')
         );
@@ -122,7 +123,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = sounds[1]
+        choose_ins = 1
         $('<span instrument="snare_drum" style="color: white">Snare Drum</span>').appendTo(
           $('#choose')
         );
@@ -130,7 +131,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#low_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = sounds[2]
+        choose_ins = 2
         $('<span instrument="low_tom" style="color: white">Low Tom</span>').appendTo(
           $('#choose')
         );
@@ -138,7 +139,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = sounds[3]
+        choose_ins = 3
         $('<span instrument="mid_tom" style="color: white">Mid Tom</span>').appendTo(
           $('#choose')
         );
@@ -269,9 +270,11 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       const curTime = new Date().getTime();
 
       if (curTime - lastTime >= INTERVAL) {
-        for (var i = 0; i < sLen; ++i) {
-          const lastBeat = beats[i * TICKS + lastTick];
-          const curBeat = beats[i * TICKS + curTick];
+        // for (var i = 0; i < sLen; ++i) {
+          // const lastBeat = beats[i * TICKS + lastTick];
+          // const curBeat = beats[i * TICKS + curTick];
+          const lastBeat = beats[ TICKS + lastTick];
+          const curBeat = beats[ TICKS + curTick];
 
           lastBeat.classList.remove('ticked');
           curBeat.classList.add('ticked');
@@ -279,7 +282,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
           if (curBeat.classList.contains('on')) {
             try {
               const source = audioCtx.createBufferSource();
-              source.buffer = buffers[i];
+              // source.buffer = buffers[i];
+              source.buffer = buffers[choose_ins];
               source.connect(audioCtx.destination);
               source.start();
             } catch (e) {
@@ -289,7 +293,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
               new Audio(sounds[i]).play();
             }
           }
-        }
+        // }
 
         lastTick = curTick;
         curTick = (curTick + 1) % TICKS;
