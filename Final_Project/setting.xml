@@ -2,6 +2,6 @@
 <ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">
     <!-- <ExternalURL>https://tingyaohsu.github.io/CrowdSourcing-Project/Final_Project/index.html</ExternalURL>
      -->
-    <ExternalURL>https://tingyaohsu.github.io/CrowdSourcing-Project/Final_Project/index_test.html</ExternalURL>
+    <ExternalURL>https://tingyaohsu.github.io/CrowdSourcing-Project/Final_Project/index.html</ExternalURL>
     <FrameHeight>1000</FrameHeight>
 </ExternalQuestion>
