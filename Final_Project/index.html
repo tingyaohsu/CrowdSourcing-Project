@@ -219,7 +219,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }, false);
         fragment.appendChild(btn);
       }
-      var tags = $('span').attr("instrument")
+      var tags = theGrid.children().toArray()[soundIndex];
       console.log(tags);
       var one_ins = $('<div></div>').attr("class",tags)
       theGrid.appendChild(one_ins);
