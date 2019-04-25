@@ -26,19 +26,39 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       margin: 0;
     }
 
-    button.beat {
+    /*button.beat {
       background-color: #DBD3C9;
       padding: 18px;
-      /*border: 10px solid white;*/
+      border: 10px solid white;
       margin: 5px;
+      cursor: pointer;
+      width: 0;
+      height: 0;
+    }*/
+
+    button.beat {
+      background-color: black;
+      padding: 7.5px;
+      border: 7.5px solid grey;
+      margin: 3px;
+      cursor: pointer;
+      width: 0;
+      height: 0;
+    }
+
+    button.beat_w {
+      background-color: black;
+      padding: 7.5px;
+      border: 7.5px solid white !important;
+      margin: 3px;
       cursor: pointer;
       width: 0;
       height: 0;
     }
 
     button.on {
-      background-color: #ADC9D2;
-      /*border-color: red;*/
+      background-color: red !important;
+      border-color: red !important;
     }
 
     button.ticked {
@@ -47,7 +67,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
 
     #grid {
-      width: 800px;
+      width: 1200px;
       height: 200px;
       position: absolute;
       top:0;
@@ -85,7 +105,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
   <script>
 
     const BPM = 120;
-    const TICKS = 16;
+    const TICKS = 32;
     const INTERVAL = 1 / (4 * BPM / (60 * 1000));
     const MAX_BITS = 32;
     const MAX_HEX = MAX_BITS / 4;
@@ -237,7 +257,11 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       const fragment = document.createDocumentFragment();
       for (var t = 0; t < TICKS; ++t) {
         const btn = document.createElement('button');
-        btn.className = 'beat';
+        if (t%8 < 4){
+          btn.className = 'beat';}
+        else {
+          btn.className = 'beat beat_w';
+        }
         btn.addEventListener('click', function () {
           this.classList.toggle('on');
           updateState();
