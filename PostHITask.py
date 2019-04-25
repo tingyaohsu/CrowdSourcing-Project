@@ -101,9 +101,9 @@ response = client.create_hit(
     LifetimeInSeconds=500000,
     AssignmentDurationInSeconds=600,
     Reward=mturk_environment['reward'],
-    Title='Cloze Test',
-    Keywords='question, answer, research, story',
-    Description='Descript a short story from the photos.',
+    Title='CrowdBeatComposer',
+    Keywords='question, answer, research',
+    Description='Compose The Beats',
     Question=question_sample,
     QualificationRequirements=worker_requirements,
 )

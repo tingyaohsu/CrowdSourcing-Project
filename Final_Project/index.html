@@ -248,8 +248,18 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       console.log(fragment);
       one_ins.appendTo(theGrid);
       $(fragment).appendTo(one_ins);
+       
     }
 
+    //add button
+    $('<div class="col text-center"><button type="button" class="btn btn-lg btn-primary" id="submitBtn">Submit</button></div>').appendTo(
+        theGrid
+    );
+    $("#submitBtn").click(function(){
+      console.log("submit ok")
+      $("#mturk_form").submit();
+    });
+    
     const beats = document.getElementsByClassName('beat');
     var lastTick = TICKS - 1;
     var curTick = 0;
