@@ -118,6 +118,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('<span instrument="bass_drum" style="color: white">Bass Drum</span>').appendTo(
           $('#choose')
         );
+        $('.snare_drum').hide();
+        $('.low_tom').hide();
+        $('.mid_tom').hide();
     });
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
@@ -126,6 +129,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('<span instrument="snare_drum" style="color: white">Snare Drum</span>').appendTo(
           $('#choose')
         );
+        $('.bass_drum').hide();
+        $('.low_tom').hide();
+        $('.mid_tom').hide();
     });
     $( "#low_tom" ).click(function() {
         $('#grid').show();
@@ -134,6 +140,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('<span instrument="low_tom" style="color: white">Low Tom</span>').appendTo(
           $('#choose')
         );
+        $('.snare_drum').hide();
+        $('.bass_drum').hide();
+        $('.mid_tom').hide();
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
@@ -142,6 +151,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('<span instrument="mid_tom" style="color: white">Mid Tom</span>').appendTo(
           $('#choose')
         );
+        $('.snare_drum').hide();
+        $('.low_tom').hide();
+        $('.bass_drum').hide();
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -223,11 +235,11 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       //console.log(tags);
       //console.log($(tags).attr("id"));
       var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
-      console.log(one_ins);
-      var theIns = document.getElementById($(one_ins).attr("id"));
-      theIns.appendTo(theGrid);
-      //fragment.appendTo(one_ins);
-      one_ins.appendChild(fragment);
+      console.log(fragment);
+      one_ins.appendTo(theGrid);
+      $(fragment).appendTo(one_ins);
+      //theIns.appendChild(fragment);
+      //theIns.appendChild(fragment);
       //theGrid.appendChild(document.createElement('p'));
     }
     const beats = document.getElementsByClassName('beat');
