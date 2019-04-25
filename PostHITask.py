@@ -28,7 +28,7 @@ import csv
 # https://requestersandbox.mturk.com/ with the same credentials as your main
 # MTurk account.
 
-
+# def PostHit():
 #load key file
 data=[]
 
@@ -54,13 +54,13 @@ environments = {
             "endpoint": "https://mturk-requester.us-east-1.amazonaws.com",
             "preview": "https://www.mturk.com/mturk/preview",
             "manage": "https://requester.mturk.com/mturk/manageHITs",
-            "reward": "0.5"
+            "reward": "0.05"
         },
         "sandbox": {
             "endpoint": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
             "preview": "https://workersandbox.mturk.com/mturk/preview",
             "manage": "https://requestersandbox.mturk.com/mturk/manageHITs",
-            "reward": "0.5"
+            "reward": "0.05"
         },
 }
 mturk_environment = environments["live"] if create_hits_in_live else environments["sandbox"]
