@@ -57,8 +57,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
 
     button.on {
-      background-color: red !important;
-      border-color: red !important;
+      background-color: #ADC9D2 !important;
+      border-color: #ADC9D2 !important;
     }
 
     button.ticked {
@@ -113,10 +113,10 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
 
     // sounds originated from http://808.html909.com
     const sounds = [
-      'sounds/bass_drum.wav',
       'sounds/snare_drum.wav',
-      'sounds/low_tom.wav',
+      'sounds/bass_drum.wav',
       'sounds/mid_tom.wav',
+      'sounds/low_tom.wav',
 
       // 'sounds/hi_tom.wav',
       // 'sounds/rim_shot.wav',
@@ -270,7 +270,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       }
       var tags = $('.button_choose').children().toArray()[soundIndex];
       var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
-      console.log(fragment);
+      //console.log(fragment);
       one_ins.appendTo(theGrid);
       $(fragment).appendTo(one_ins);
        
