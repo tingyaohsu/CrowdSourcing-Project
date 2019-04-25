@@ -85,7 +85,6 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const INTERVAL = 1 / (4 * BPM / (60 * 1000));
     const MAX_BITS = 32;
     const MAX_HEX = MAX_BITS / 4;
-    choose_ins = 0;
 
     // sounds originated from http://808.html909.com
     const sounds = [
@@ -220,8 +219,12 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }, false);
         fragment.appendChild(btn);
       }
-      theGrid.appendChild(fragment);
-      theGrid.appendChild(document.createElement('p'));
+      var tags = $('span').attr("instrument")
+      console.log(tags);
+      var one_ins = $('<div></div>').attr("class",tags)
+      theGrid.appendChild(one_ins);
+      one_ins.appendChild(fragment);
+      one_ins.appendChild(document.createElement('p'));
     }
     const beats = document.getElementsByClassName('beat');
     var lastTick = TICKS - 1;
