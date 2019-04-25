@@ -119,7 +119,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#bass_drum" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = 0
+        //choose_ins = 0
         $('<span instrument="bass_drum" style="color: white">Bass Drum</span>').appendTo(
           $('#choose')
         );
@@ -130,7 +130,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = 1
+        //choose_ins = 1
         $('<span instrument="snare_drum" style="color: white">Snare Drum</span>').appendTo(
           $('#choose')
         );
@@ -141,24 +141,24 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $( "#low_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = 2
+        //choose_ins = 2
         $('<span instrument="low_tom" style="color: white">Low Tom</span>').appendTo(
           $('#choose')
         );
-        $('.snare_drum').hide();
         $('.bass_drum').hide();
+        $('.snare_drum').hide();
         $('.mid_tom').hide();
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
         $('.button_choose').hide();
-        choose_ins = 3
+        //choose_ins = 3
         $('<span instrument="mid_tom" style="color: white">Mid Tom</span>').appendTo(
           $('#choose')
         );
+        $('.bass_drum').hide();
         $('.snare_drum').hide();
         $('.low_tom').hide();
-        $('.bass_drum').hide();
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
