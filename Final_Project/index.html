@@ -225,8 +225,9 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
       console.log(one_ins);
       one_ins.appendTo(theGrid);
-      theGrid.appendChild(fragment);
-      theGrid.appendChild(document.createElement('p'));
+      fragment.appendTo(one_ins);
+      //theGrid.appendChild(fragment);
+      //theGrid.appendChild(document.createElement('p'));
     }
     const beats = document.getElementsByClassName('beat');
     var lastTick = TICKS - 1;
