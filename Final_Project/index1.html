@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!--
+Beatboxer
+Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="mturk.js"></script>
+
+  <title>Crowdcomposer</title>
+
+  <link rel="canonical" href="https://tingyaohsu.github.io/CrowdSourcing-Project/Final_Project/index.html" />
+
+  <style>
+    body {
+      background-color: black;
+    }
+
+    button.beat {
+      background-color: black;
+      padding: 7.5px;
+      border: 7.5px solid grey;
+      margin: 3px;
+      cursor: pointer;
+      width: 0;
+      height: 0;
+    }
+
+    button.beat_w {
+      background-color: black;
+      padding: 7.5px;
+      border: 7.5px solid white;
+      margin: 3px;
+      cursor: pointer;
+      width: 0;
+      height: 0;
+    }
+
+    button.on {
+      background-color: #ADC9D2 !important;
+      border-color: #ADC9D2 !important;
+    }
+
+    button.ticked {
+      background-color: white;
+      border-color: white;
+    }
+
+    #grid {
+      width: 1200px;
+      height: 200px;
+      position: relative;
+      top:20px;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    .ins_text{ 
+      font-style: italic;
+      color: white;
+      font-size: 25px; 
+    }
+    .button_choose{
+      margin-top: 40px;
+    }
+    .btn-click{
+      margin: 10px;
+    }
+    #submitBtn{
+      margin-top: 30px;
+    }
+
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+  </style>
+</head>
+<body>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">CrowdBeatComposer</h1>
+      <p class="lead text-muted">Building Beat together for fun !!!<br><br> Please choose one of the four following instruments you want and click at least five beats(box). Please turn on your volume.</p>
+    </div>
+  </section>
+  <div class="container">
+      <h1 class="text-center title_word" style="color: white">Instrument</h1>
+      <div id="choose" class="text-center">
+        <div class="button_choose">
+          <button type="button" class="btn btn-info btn-lg btn-click" id="bass_drum">Bass Drum</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="snare_drum">Snare Drum</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="low_tom">Low Tom</button>
+          <button type="button" class="btn btn-info btn-lg btn-click" id="mid_tom">Mid Tom</button>
+        </div>
+      </div>
+      <div id="grid"></div>
+    <form id="mturk_form" name="mturk_form">
+      <input type="hidden" name="answer" id="answer" value="">
+    </form>
+  </div>
+  <script>
+
+    const BPM = 120;
+    const TICKS = 32;
+    const INTERVAL = 1 / (4 * BPM / (60 * 1000));
+    const MAX_BITS = 32;
+    const MAX_HEX = MAX_BITS / 4;
+    //var hash;
+
+    // sounds originated from http://808.html909.com
+    const sounds = [
+      'sounds/snare_drum.wav',
+      'sounds/bass_drum.wav',
+      'sounds/mid_tom.wav',
+      'sounds/low_tom.wav',
+
+      // 'sounds/hi_tom.wav',
+      // 'sounds/rim_shot.wav',
+      // 'sounds/hand_clap.wav',
+      // 'sounds/cowbell.wav',
+      // 'sounds/cymbal.wav',
+      // 'sounds/o_hi_hat.wav',
+      // 'sounds/cl_hi_hat.wav',
+
+      // 'sounds/low_conga.wav',
+      // 'sounds/mid_conga.wav',
+      // 'sounds/hi_conga.wav',
+      // 'sounds/claves.wav',
+      // 'sounds/maracas.wav',
+    ];
+
+    //Choose Your option
+    $('#grid').hide();
+    $('#bass_drum').hide();
+    
+    $( "#bass_drum" ).click(function() {
+        $('#grid').show();
+        $('.button_choose').hide();
+        //choose_ins = 0
+        $('<span class="ins_text" instrument="bass_drum">Bass Drum</span>').appendTo(
+          $('#choose')
+        );
+        $('.snare_drum').hide();
+        $('.low_tom').hide();
+        $('.mid_tom').hide();
+        $('.title_word').hide();
+    });
+    $( "#snare_drum" ).click(function() {
+        $('#grid').show();
+        $('.button_choose').hide();
+        //choose_ins = 1
+        $('<span class="ins_text" instrument="snare_drum">Snare Drum</span>').appendTo(
+          $('#choose')
+        );
+        $('.bass_drum').hide();
+        $('.low_tom').hide();
+        $('.mid_tom').hide();
+        $('.title_word').hide();
+    });
+    $( "#low_tom" ).click(function() {
+        $('#grid').show();
+        $('.button_choose').hide();
+        //choose_ins = 2
+        $('<span class="ins_text" instrument="low_tom">Low Tom</span>').appendTo(
+          $('#choose')
+        );
+        $('.bass_drum').hide();
+        $('.snare_drum').hide();
+        $('.mid_tom').hide();
+        $('.title_word').hide();
+    });
+    $( "#mid_tom" ).click(function() {
+        $('#grid').show();
+        $('.button_choose').hide();
+        //choose_ins = 3
+        $('<span class="ins_text" instrument="mid_tom">Mid Tom</span>').appendTo(
+          $('#choose')
+        );
+        $('.bass_drum').hide();
+        $('.snare_drum').hide();
+        $('.low_tom').hide();
+        $('.title_word').hide();
+    });
+
+    const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    const buffers = [];
+    const theGrid = document.getElementById('grid');
+    const sLen = sounds.length;
+
+    //var global_hash ='';
+
+    function binToHex(bin) {
+      var hex = '';
+      for (i = 0, len = bin.length; i < len; i += MAX_BITS) {
+        var tmp = parseInt(bin.substr(i,MAX_BITS), 2).toString(16);
+        while (tmp.length < MAX_HEX) {
+          tmp = '0' + tmp;
+        }
+        hex += tmp;
+      }
+      return hex;
+    }
+    function hexToBin(hex) {
+      var bin = '';
+      for (i = 0, len = hex.length; i < len; i += MAX_HEX) {
+        var tmp = parseInt(hex.substr(i,MAX_HEX), 16).toString(2);
+        while (tmp.length < MAX_BITS) {
+          tmp = '0' + tmp;
+        }
+        bin += tmp;
+      }
+      return bin;
+    }
+    // represent the hash as two 32-bit integers, in hex
+    function updateState() {
+      var state = '04283000000000000000000000000000';
+      Array.from(beats).map(function(btn) {
+        state += btn.classList.contains('on') ? '1' : '0';
+      });
+      // TODO: this causes an unnecessary restore state
+      // window.location.hash = binToHex(state);
+      // global_hash = binToHex(state);
+      $("#answer").val(binToHex(state));
+    }
+    function restoreState() {
+      // var hash = window.location.hash;
+      var hash = $("#answer").val();
+      console.log(hash);
+      hash = (hash === '') ? '0000000000000000' : hash.substr(1); // Remove the first char (#...)
+      hexToBin(hash).split('').map(function(el, i) {
+        if (parseInt(el) === 1) {
+          beats[i].classList.add('on');
+        } else {
+          beats[i].classList.remove('on');
+        }
+      });
+    }
+    // needed for page history
+    window.addEventListener('hashchange', restoreState, false);
+
+    for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
+      (function (index) {
+        // create buffer for sound
+        const req = new XMLHttpRequest();
+        req.open('GET', sounds[index], true);
+        req.responseType = 'arraybuffer';
+        req.onload = function () {
+          audioCtx.decodeAudioData(
+            req.response,
+            function (buffer) {
+              buffers.push(buffer);
+            }
+          );
+        };
+        req.send();
+      })(soundIndex);
+      // create row for sound
+      const fragment = document.createDocumentFragment();
+      for (var t = 0; t < TICKS; ++t) {
+        const btn = document.createElement('button');
+        if (t%8 < 4){
+          btn.className = 'beat';}
+        else {
+          btn.className = 'beat beat_w';
+        }
+        btn.addEventListener('click', function () {
+          this.classList.toggle('on');
+          updateState();
+        }, false);
+        fragment.appendChild(btn);
+      }
+      var tags = $('.button_choose').children().toArray()[soundIndex];
+      var one_ins = $('<div></div>').attr("class",$(tags).attr("id"))
+      //console.log(fragment);
+      one_ins.appendTo(theGrid);
+      $(fragment).appendTo(one_ins);
+       
+    }
+
+    //add button
+    $('<div class="text-center"><button type="button" class="btn btn-lg btn-primary" id="submitBtn">Submit</button></div>').appendTo(
+        theGrid
+    );
+    $("#submitBtn").click(function(){
+      // $("#.id").children().hasClass("on"){
+      //   console.log("have");
+      // });
+      console.log("submit ok")
+      $("#mturk_form").submit();
+    });
+
+    const beats = document.getElementsByClassName('beat');
+    var lastTick = TICKS - 1;
+    var curTick = 0;
+    var lastTime = new Date().getTime();
+
+    function drumLoop() {
+      const curTime = new Date().getTime();
+      if (curTime - lastTime >= INTERVAL) {
+        for (var i = 0; i < sLen; ++i) {
+          const lastBeat = beats[i * TICKS + lastTick];
+          const curBeat = beats[i * TICKS + curTick];
+          lastBeat.classList.remove('ticked');
+          curBeat.classList.add('ticked');
+          if (curBeat.classList.contains('on')) {
+            try {
+              const source = audioCtx.createBufferSource();
+              source.buffer = buffers[i];
+              source.connect(audioCtx.destination);
+              source.start();
+            } catch (e) {
+              console.error(e.message);
+              // Fallback method
+              new Audio(sounds[i]).play();
+            }
+          }
+        }
+        lastTick = curTick;
+        curTick = (curTick + 1) % TICKS;
+        lastTime = curTime;
+      }
+      requestAnimationFrame(drumLoop);
+    }
+    // Restore the state before we start the drum loop
+    restoreState();
+    requestAnimationFrame(drumLoop);
+    // adapted from https://paulbakaus.com/tutorials/html5/web-audio-on-ios/
+    function enableIOSAudio() {
+      const buffer = audioCtx.createBuffer(1, 1, 22050);
+      const source = audioCtx.createBufferSource();
+      source.buffer = buffer;
+      source.connect(audioCtx.destination);
+      source.noteOn(0);
+      window.removeEventListener('touchend', enableIOSAudio, false);
+    }
+    window.addEventListener('touchend', enableIOSAudio, false);
+  </script>
+</body>
+</html>
