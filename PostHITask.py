@@ -32,7 +32,7 @@ import csv
 #load key file
 data=[]
 
-with open('../../rootkey.csv', 'r') as csvFile:
+with open('../rootkey.csv', 'r') as csvFile:
     reader = csv.reader(csvFile)
     for row in reader:
         root = ''.join(row)
@@ -54,7 +54,7 @@ environments = {
             "endpoint": "https://mturk-requester.us-east-1.amazonaws.com",
             "preview": "https://www.mturk.com/mturk/preview",
             "manage": "https://requester.mturk.com/mturk/manageHITs",
-            "reward": "0.05"
+            "reward": "0.25"
         },
         "sandbox": {
             "endpoint": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
@@ -102,7 +102,7 @@ response = client.create_hit(
     AssignmentDurationInSeconds=600,
     Reward=mturk_environment['reward'],
     Title='CrowdBeatComposer',
-    Keywords='question, answer, research',
+    Keywords='music, compose, beats, temple',
     Description='Compose The Beats',
     Question=question_sample,
     QualificationRequirements=worker_requirements,
