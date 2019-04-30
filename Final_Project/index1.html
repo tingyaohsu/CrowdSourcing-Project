@@ -217,7 +217,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
     // represent the hash as two 32-bit integers, in hex
     function updateState() {
-      var state = '04283000000000000000000000000000';
+      // var state = '';
+      var state = hexToBin("04283000000000000000000000000000")
       Array.from(beats).map(function(btn) {
         state += btn.classList.contains('on') ? '1' : '0';
       });
