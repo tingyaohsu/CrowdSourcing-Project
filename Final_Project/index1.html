@@ -218,9 +218,11 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     // represent the hash as two 32-bit integers, in hex
     function updateState() {
       // var state = '';
-      var state = hexToBin("04283000000000000000000000000000")
-      Array.from(beats).map(function(btn) {
-        state += btn.classList.contains('on') ? '1' : '0';
+      var state = hexToBin("02080000000000000000000000000000")
+      Array.from(beats).map(function(btn, i) {
+        var temp = parseInt(state[i]) + btn.classList.contains("on") ? 1 : 0;
+        state[i] = temp.toString();
+        // state += btn.classList.contains('on') ? '1' : '0';
       });
       // TODO: this causes an unnecessary restore state
       // window.location.hash = binToHex(state);
