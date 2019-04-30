@@ -99,7 +99,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       </div>
       <div id="grid"></div>
     <form id="mturk_form" name="mturk_form">
-      <input type="hidden" name="answer" id="answer" value="">
+      <input type="hidden" name="answer" id="answer" value="#02080000000000000000000000000000">
     </form>
   </div>
   <script>
@@ -217,12 +217,12 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     }
     // represent the hash as two 32-bit integers, in hex
     function updateState() {
-      // var state = '';
-      var state = hexToBin("02080000000000000000000000000000")
+      var state = '';
+      // var state = hexToBin("02080000000000000000000000000000")
       Array.from(beats).map(function(btn, i) {
-        var temp = parseInt(state[i]) + btn.classList.contains("on") ? 1 : 0;
-        state[i] = temp.toString();
-        // state += btn.classList.contains('on') ? '1' : '0';
+        // var temp = parseInt(state[i]) + btn.classList.contains("on") ? 1 : 0;
+        // state[i] = temp.toString();
+        state += btn.classList.contains('on') ? '1' : '0';
       });
       // TODO: this causes an unnecessary restore state
       // window.location.hash = binToHex(state);
