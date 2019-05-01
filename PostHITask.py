@@ -47,7 +47,7 @@ aws_secret_access_key = data[1].split('=')[1]    #'YOUR_SECRET_KEY'
 #print(aws_secret_access_key)
 
 # By default, HITs are created in the free-to-use Sandbox
-create_hits_in_live = False
+create_hits_in_live = True
 
 environments = {
         "live": {
@@ -91,7 +91,7 @@ question_sample = open("./Final_Project/setting.xml", "r").read()
 worker_requirements = [{
     'QualificationTypeId': '00000000000000000040',
     'Comparator': 'GreaterThanOrEqualTo',
-    'IntegerValues': [0],
+    'IntegerValues': [300],
     'RequiredToPreview': True,
 }]
 
