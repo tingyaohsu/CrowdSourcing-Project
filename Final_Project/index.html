@@ -89,7 +89,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
   </section>
   <div class="container">
       <h1 class="text-center title_word" style="color: white">Instrument</h1>
-      <div id="choose" class="text-center">
+      <div id="choose" class="text-center btn-list">
         <div class="button_choose">
           <button type="button" class="btn btn-info btn-lg btn-click" id="bass_drum">Bass Drum</button>
           <button type="button" class="btn btn-info btn-lg btn-click" id="snare_drum">Snare Drum</button>
@@ -301,9 +301,10 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $("#erro").remove();
         $("<div></div>").text("click at least five beats !!!")
                         .css("color","red")
-                        .css("margin-bottom","10px")
+                        .css("margin","20px")
+                        .css("font-size","30px")
                         .attr("id","erro")
-                        .appendTo($("#submitBtn"))
+                        .appendTo($(".btn-list"))
       }
     });
 
