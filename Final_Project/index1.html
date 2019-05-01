@@ -99,7 +99,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       </div>
       <div id="grid"></div>
     <form id="mturk_form" name="mturk_form">
-      <!-- <input type="hidden" name="answer" id="answer" value="#00c0652c041104080000000000000000"> -->
+      <input type="hidden" name="answer" id="answer" value="#00000000041104080000000000000000">
       <input type="hidden" name="btn-type" id="btn-type" value="">
     </form>
   </div>
@@ -136,7 +136,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
 
     //Choose Your option
     $('#grid').hide();
-    $( "#bass_drum" ).hide()
+    // $( "#bass_drum" ).hide()
     $( "#snare_drum" ).hide()
     // $( "#low_tom" ).hide()
     // $( "#mid_tom" ).hide()
@@ -198,7 +198,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const buffers = [];
     const theGrid = document.getElementById('grid');
     const sLen = sounds.length;
-
+    const global_check = $("#grid").find($(".on"))
+    console.log("lenth old:",global_check.length)
     //var global_hash ='';
 
     function binToHex(bin) {
@@ -297,7 +298,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     );
     $("#submitBtn").click(function(){
       check = $("#grid").find($(".on"))
-      if (check.length>=5){
+      if (check.length-global_check.length>=5){
         $("#mturk_form").submit();
         console.log("submit ok")
       }
@@ -310,6 +311,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
                         .attr("id","erro")
                         .appendTo($(".btn-list"))
       }
+      console.log("lenth new:",check.length)
     });
 
     const beats = document.getElementsByClassName('beat');
