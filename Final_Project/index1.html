@@ -99,7 +99,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       </div>
       <div id="grid"></div>
     <form id="mturk_form" name="mturk_form">
-      <input type="hidden" name="answer" id="answer" value="#88410808041104080000000000000000">
+      <input type="hidden" name="answer" id="answer" value="#88410808041104080840fe0000000000">
       <input type="hidden" name="btn-type" id="btn-type" value="">
     </form>
   </div>
@@ -138,7 +138,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     $('#grid').hide();
     $( "#bass_drum" ).hide()
     $( "#snare_drum" ).hide()
-    // $( "#low_tom" ).hide()
+    $( "#low_tom" ).hide()
     // $( "#mid_tom" ).hide()
     
     $( "#bass_drum" ).click(function() {
@@ -298,7 +298,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     );
     $("#submitBtn").click(function(){
       check = $("#grid").find($(".on"))
-      if (check.length>=11){
+      if (check.length>=20){
         $("#mturk_form").submit();
         // console.log("submit ok")
       }
