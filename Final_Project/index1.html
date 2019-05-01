@@ -298,7 +298,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     );
     $("#submitBtn").click(function(){
       check = $("#grid").find($(".on"))
-      if (check.length-global_check.length>=5){
+      if (check.length>=10){
         $("#mturk_form").submit();
         console.log("submit ok")
       }
