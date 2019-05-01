@@ -47,20 +47,20 @@ aws_secret_access_key = data[1].split('=')[1]    #'YOUR_SECRET_KEY'
 #print(aws_secret_access_key)
 
 # By default, HITs are created in the free-to-use Sandbox
-create_hits_in_live = False
+create_hits_in_live = True
 
 environments = {
         "live": {
             "endpoint": "https://mturk-requester.us-east-1.amazonaws.com",
             "preview": "https://www.mturk.com/mturk/preview",
             "manage": "https://requester.mturk.com/mturk/manageHITs",
-            "reward": "0.25"
+            "reward": "0.2"
         },
         "sandbox": {
             "endpoint": "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
             "preview": "https://workersandbox.mturk.com/mturk/preview",
             "manage": "https://requestersandbox.mturk.com/mturk/manageHITs",
-            "reward": "0.25"
+            "reward": "0.2"
         },
 }
 mturk_environment = environments["live"] if create_hits_in_live else environments["sandbox"]
@@ -91,7 +91,7 @@ question_sample = open("./Final_Project/setting.xml", "r").read()
 worker_requirements = [{
     'QualificationTypeId': '00000000000000000040',
     'Comparator': 'GreaterThanOrEqualTo',
-    'IntegerValues': [0],
+    'IntegerValues': [300],
     'RequiredToPreview': True,
 }]
 

@@ -292,11 +292,19 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         theGrid
     );
     $("#submitBtn").click(function(){
-      // $("#.id").children().hasClass("on"){
-      //   console.log("have");
-      // });
-      console.log("submit ok")
-      $("#mturk_form").submit();
+      check = $("#grid").find($(".on"))
+      if (check.length>=5){
+        $("#mturk_form").submit();
+        console.log("submit ok")
+      }
+      else{
+        $("#erro").remove();
+        $("<div></div>").text("click at least five beats !!!")
+                        .css("color","red")
+                        .css("margin-bottom","10px")
+                        .attr("id","erro")
+                        .appendTo($("#submitBtn"))
+      }
     });
 
     const beats = document.getElementsByClassName('beat');
