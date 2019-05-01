@@ -100,6 +100,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       <div id="grid"></div>
     <form id="mturk_form" name="mturk_form">
       <input type="hidden" name="answer" id="answer" value="#004b1000000000000000000000000000">
+      <input type="hidden" name="btn-type" id="btn-type" value="">
     </form>
   </div>
   <script>
@@ -135,7 +136,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
 
     //Choose Your option
     $('#grid').hide();
-    $('#bass_drum').hide();
+    $( "#bass_drum" ).hide()
     
     $( "#bass_drum" ).click(function() {
         $('#grid').show();
@@ -148,6 +149,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.low_tom').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("bass_drum");
     });
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
@@ -160,6 +162,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.low_tom').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("snare_drum");
     });
     $( "#low_tom" ).click(function() {
         $('#grid').show();
@@ -172,6 +175,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.snare_drum').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("low_tom");
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
@@ -184,6 +188,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.snare_drum').hide();
         $('.low_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("mid_tom");
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -202,6 +207,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         hex += tmp;
       }
+      console.log("hex:"+hex)
       return hex;
     }
     function hexToBin(hex) {
@@ -213,15 +219,13 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         bin += tmp;
       }
+      console.log("bin:"+bin)
       return bin;
     }
     // represent the hash as two 32-bit integers, in hex
     function updateState() {
       var state = '';
-      // var state = hexToBin("02080000000000000000000000000000")
-      Array.from(beats).map(function(btn, i) {
-        // var temp = parseInt(state[i]) + btn.classList.contains("on") ? 1 : 0;
-        // state[i] = temp.toString();
+      Array.from(beats).map(function(btn) {
         state += btn.classList.contains('on') ? '1' : '0';
       });
       // TODO: this causes an unnecessary restore state
@@ -243,7 +247,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       });
     }
     // needed for page history
-    // window.addEventListener('hashchange', restoreState, false);
+    window.addEventListener('hashchange', restoreState, false);
 
     for (var soundIndex = 0; soundIndex < sLen; ++soundIndex) {
       (function (index) {
@@ -329,8 +333,8 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       requestAnimationFrame(drumLoop);
     }
     // Restore the state before we start the drum loop
-    updateState();
     restoreState();
+    updateState();
     requestAnimationFrame(drumLoop);
     // adapted from https://paulbakaus.com/tutorials/html5/web-audio-on-ios/
     function enableIOSAudio() {

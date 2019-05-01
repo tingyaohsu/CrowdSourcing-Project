@@ -100,6 +100,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       <div id="grid"></div>
     <form id="mturk_form" name="mturk_form">
       <input type="hidden" name="answer" id="answer" value="">
+      <input type="hidden" name="btn-type" id="btn-type" value="">
     </form>
   </div>
   <script>
@@ -147,6 +148,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.low_tom').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("bass_drum");
     });
     $( "#snare_drum" ).click(function() {
         $('#grid').show();
@@ -159,6 +161,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.low_tom').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("snare_drum");
     });
     $( "#low_tom" ).click(function() {
         $('#grid').show();
@@ -171,6 +174,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.snare_drum').hide();
         $('.mid_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("low_tom");
     });
     $( "#mid_tom" ).click(function() {
         $('#grid').show();
@@ -183,6 +187,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         $('.snare_drum').hide();
         $('.low_tom').hide();
         $('.title_word').hide();
+        $('#btn-type').val("mid_tom");
     });
 
     const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
@@ -201,6 +206,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         hex += tmp;
       }
+      console.log("hex:"+hex)
       return hex;
     }
     function hexToBin(hex) {
@@ -212,6 +218,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         bin += tmp;
       }
+      console.log("bin:"+bin)
       return bin;
     }
     // represent the hash as two 32-bit integers, in hex
