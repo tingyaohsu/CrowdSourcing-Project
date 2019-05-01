@@ -199,7 +199,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     const theGrid = document.getElementById('grid');
     const sLen = sounds.length;
     const global_check = $("#grid").find($(".on"))
-    console.log("lenth old:",global_check.length)
+    // console.log("lenth old:",global_check.length)
     //var global_hash ='';
 
     function binToHex(bin) {
@@ -211,7 +211,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         hex += tmp;
       }
-      console.log("hex:"+hex)
+      // console.log("hex:"+hex)
       return hex;
     }
     function hexToBin(hex) {
@@ -223,7 +223,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         }
         bin += tmp;
       }
-      console.log("bin:"+bin)
+      // console.log("bin:"+bin)
       return bin;
     }
     // represent the hash as two 32-bit integers, in hex
@@ -240,7 +240,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
     function restoreState() {
       // var hash = window.location.hash;
       var hash = $("#answer").val();
-      console.log(hash);
+      // console.log(hash);
       hash = (hash === '') ? '0000000000000000' : hash.substr(1); // Remove the first char (#...)
       hexToBin(hash).split('').map(function(el, i) {
         if (parseInt(el) === 1) {
@@ -300,7 +300,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
       check = $("#grid").find($(".on"))
       if (check.length>=10){
         $("#mturk_form").submit();
-        console.log("submit ok")
+        // console.log("submit ok")
       }
       else{
         $("#erro").remove();
@@ -311,7 +311,7 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
                         .attr("id","erro")
                         .prependTo($("#choose"))
       }
-      console.log("lenth new:",check.length)
+      // console.log("lenth new:",check.length)
     });
 
     const beats = document.getElementsByClassName('beat');
